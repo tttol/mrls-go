@@ -1,0 +1,52 @@
+package model
+
+import "time"
+
+type MergeRequest struct {
+	ID                          int
+	Iid                         int
+	ProjectID                   int
+	Title                       string
+	Description                 string
+	State                       string
+	CreatedAt                   time.Time
+	UpdatedAt                   time.Time
+	MergedBy                    string
+	MergeUser                   interface{}
+	MergedAt                    time.Time
+	ClosedBy                    string
+	ClosedAt                    time.Time
+	TargetBranch                string
+	SourceBranch                string
+	UserNotesCount              int
+	Upvotes                     int
+	Downvotes                   int
+	Author                      User
+	Assignees                   []User
+	Assignee                    User
+	Reviewers                   []User
+	SourceProjectID             int
+	TargetProjectID             int
+	Labels                      []string
+	Draft                       bool
+	WorkInProgress              bool
+	Milestone                   interface{}
+	MergeWhenPipelineSucceeds   bool
+	MergeStatus                 string
+	DetailedMergeStatus         string
+	Sha                         string
+	MergeCommitSha              string
+	SquashCommitSha             string
+	DiscussionLocked            string
+	ShouldRemoveSourceBranch    bool
+	ForceRemoveSourceBranch     bool
+	Reference                   string
+	References                  interface{}
+	WebUrl                      string
+	TimeStats                   interface{}
+	Squash                      bool
+	TaskCompletionStatus        interface{}
+	HasConflicts                bool
+	BlockingDiscussionsResolved bool
+	ApprovalsBeforeMerge        string
+}
