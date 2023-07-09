@@ -2,7 +2,7 @@ package model
 
 import "time"
 
-type MergeRequest struct {
+type Mr struct {
 	ID                          int         `json:"id"`
 	Iid                         int         `json:"iid"`
 	ProjectID                   int         `json:"project_id"`

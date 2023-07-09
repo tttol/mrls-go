@@ -3,7 +3,7 @@ package gitlab
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -28,12 +28,12 @@ func GetGitLabMr(c *gin.Context) {
 	}
 	defer res.Body.Close()
 
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var mr []model.MergeRequest
+	var mr []model.Mr
 	jsonStr := string(body)
 	err = json.Unmarshal([]byte(jsonStr), &mr)
 	if err != nil {
@@ -43,4 +43,27 @@ func GetGitLabMr(c *gin.Context) {
 	fmt.Print(mr)
 
 	c.IndentedJSON(http.StatusOK, string(body))
+}
+
+func generateMrDetailList(mr []model.Mr) map[int][]model.MrDetail {
+	mrDetailsMap := map[int][]model.MrDetail{}
+	for _, e := range mr {
+		asigneeId := e.Assignee.ID
+		mrDetailList := mrDetailsMap[asigneeId]
+		mrDetailsMap[asigneeId] = append(mrDetailList, generateMrDetail(e))
+	}
+
+	return mrDetailsMap
+}
+
+func generateMrDetail(mr model.Mr) model.MrDetail {
+	return model.MrDetail{
+		Title:     mr.Title,
+		WebUrl:    mr.WebUrl,
+		Author:    mr.Author,
+		Upvotes:   mr.Upvotes,
+		Labels:    mr.Labels,
+		CreatedAt: mr.CreatedAt,
+		UpdatedAt: mr.UpdatedAt,
+	}
 }

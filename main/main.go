@@ -7,7 +7,7 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.GET("/v1/mr", gitlab.GetGitLabMr)
+	router.GET("/mrls", gitlab.GetGitLabMr)
 
 	router.Run("localhost:8080")
 }

@@ -2,6 +2,6 @@ package model
 
 type MrInfo struct {
 	Assignee        User
-	MrDetailForms   []MrDetail
+	MrDetails       []MrDetail
 	AssignedMrCount int
 }
