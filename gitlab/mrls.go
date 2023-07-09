@@ -42,10 +42,17 @@ func GetGitLabMr(c *gin.Context) {
 
 	fmt.Print(mr)
 
-	c.IndentedJSON(http.StatusOK, string(body))
+	mrDetailsJson, err := json.Marshal(generateMrDetailsMap(mr))
+	if err != nil {
+		log.Fatalf("JSON marshaling failed: %s", err)
+	}
+
+	// fmt.Println(string(mrDetailsJson))
+
+	c.IndentedJSON(http.StatusOK, string(mrDetailsJson))
 }
 
-func generateMrDetailList(mr []model.Mr) map[int][]model.MrDetail {
+func generateMrDetailsMap(mr []model.Mr) map[int][]model.MrDetail {
 	mrDetailsMap := map[int][]model.MrDetail{}
 	for _, e := range mr {
 		asigneeId := e.Assignee.ID

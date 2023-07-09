@@ -8,7 +8,7 @@ import (
 	"github.com/tttol/mrls-go/model"
 )
 
-func TestGenerateMrDetailList(t *testing.T) {
+func TestGenerateMrDetailsMap(t *testing.T) {
 	// 1. Prepare the data
 	author := model.User{
 		ID:        1,
@@ -45,7 +45,7 @@ func TestGenerateMrDetailList(t *testing.T) {
 	mr := []model.Mr{mr1, mr2}
 
 	// 2. Call the function
-	actual := generateMrDetailList(mr)
+	actual := generateMrDetailsMap(mr)
 
 	// 3. Check the result
 	mrDetail1 := generateMrDetail(mr1)
